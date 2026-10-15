@@ -1,0 +1,59 @@
+# ---------------------------------------------------------
+# RF-DETR-L Training Configuration for Acne04v2
+# Task: Class-Agnostic Detection (Detection Only)
+# ---------------------------------------------------------
+
+dataset:
+#  train_json: "/root/dataset-roboflow/train/_annotations.coco.json"
+#  val_json: "/root/dataset-roboflow/valid/_annotations.coco.json"
+#  test_json: "/root/dataset-roboflow/test/_annotations.coco.json"
+#  img_dir: "/root/dataset-roboflow/"
+#  num_classes: 1
+  train_json: "/root/dataset_coco/train/_annotations.coco.json"
+  val_json: "/root/dataset_coco/valid/_annotations.coco.json"
+  test_json: "/root/dataset_coco/test/_annotations.coco.json"
+  img_dir: "/root/dataset_coco/"
+  num_classes: 1
+
+model:
+  architecture: "rf-detr-l"
+  pretrained: True
+
+training:
+  epochs: 150
+  resolution: 1024
+  batch_size: 2
+  grad_accum_steps: 8
+  lr: 0.0001
+  lr_encoder: 0.00001
+  weight_decay: 0.0005
+  seed: 42
+  early_stopping: True
+  early_stopping_patience: 20
+  threshold: 0.30
+
+#  epochs: 150
+#  resolution: 1024             # Sweet spot for A100 80GB (high fidelity)
+#  batch_size: 4                # A100 80GB can handle batch size of 4 at 1024px
+#  grad_accum_steps: 4          # 4 x 4 = Effective Batch Size 16
+#  lr: 0.0001
+#  lr_encoder: 0.00001          # Crucial for preserving pretrained backbone representations
+#  weight_decay: 0.0001
+#  seed: 42
+#  early_stopping: True
+#  early_stopping_patience: 20
+#  threshold: 0.50
+
+#  epochs: 150
+#  batch_size: 4
+#  grad_accum_steps: 4
+#  early_stopping: True
+#  early_stopping_patience: 25
+
+augmentation:
+  RandomBrightnessContrast:
+    p: 0.2
+  Affine:                  # Modern replacement for ShiftScaleRotate
+    scale: [0.9, 1.1]      # Equivalent to scale_limit: 0.1 (Zoom in/out 10%)
+    rotate: [-15, 15]      # Equivalent to rotate_limit: 15 (+/- 15 degrees)
+    p: 0.3

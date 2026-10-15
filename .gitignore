@@ -1,0 +1,47 @@
+# =========================================================
+# Datasets (Ignored per configuration)
+# =========================================================
+dataset-roboflow/
+dataset_coco/
+dataset_coco_full/
+acne04v3/
+datasets/
+*.coco.json
+
+# =========================================================
+# Python Environment & Caches
+# =========================================================
+.venv/
+venv/
+env/
+ENV/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# =========================================================
+# Training intermediate checkpoints & large artifacts
+# =========================================================
+*.ckpt
+*.tfevents.*
+output_model/
+output/
+
+# =========================================================
+# IDE & System Files
+# =========================================================
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================================================
+# Modal and Cloud Telemetry
+# =========================================================
+.modal/
+*.log
